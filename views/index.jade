@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
+	div#container
+		label(for="longurl") 请输入要转换的长地址
+		br
+		input#longurl.urlinput
+		button#btn1 转换
+		p#result.result
