@@ -1,4 +1,7 @@
 extends layout
+block style
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	link(rel="stylesheets", href="./stylesheets/animate.min.css")
 
 block content
 	h1= title
@@ -9,3 +12,5 @@ block content
 		input#longurl.urlinput
 		button#btn1 转换
 		p#result.result
+	script(src="./javascripts/index.js")
+	script(src="./javascripts/fetch.js")

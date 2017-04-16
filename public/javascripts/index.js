@@ -8,18 +8,34 @@ var reqObj = {
 
 function btnClickHandle(e){
 	var event = e || window.event;
-	console.log(e)
+	if(reqObj.longurl && reqObj.longurl !== ''){
+		fetch('/index/create', {
+			method: "POST",
+		    headers: {
+		        "Content-Type": "application/x-www-form-urlencoded"
+		    },
+		    body: 'longurl=' + encodeURIComponent(reqObj.longurl),
+			credentials: 'include'
+		}).then(function(res){
+			return res.json();
+		}).then(function(data){
+			console.log(data);
+			if(data){
+				oP.innerText = data.shorturl;
+			} else {
+				oP.innerText = '请求出错';
+			}
+		})
+	}
 }
 function txtChangeHandle(e){
 	var event = e || window.event;
 	var target = e.target;
 	if(event.type === 'textinput' || event.type === "textInput"){
 		reqObj.longurl = event.target.value + event.data;
-		console.log(reqObj.longurl);
 	} else if(event.type === 'keypress'){
 		if(event.keyCode !== 13){
 			reqObj.longurl = event.target.value + event.key;
-			console.log(reqObj.longurl);
 		}	
 	}
 }
