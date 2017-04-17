@@ -43,7 +43,10 @@ urlShorten = {
 
 			shortArr.push(shorturl);
 		}
-		return shortArr[(Math.floor(Math.random() * 4))];
+		return {
+			featureCodes: shortArr,
+			md5: md5str
+		}
 	}
 
 }
@@ -55,12 +58,13 @@ urlShorten = {
 
 module.exports.addShortUrl = function(longurl, callback){
 	ShortUrl.addShortUrl({
-		FeatureCode: urlShorten.getShort(longurl),
+		FeatureCode: urlShorten.getShort(longurl).featureCodes,
 		defaultPrefix: defaultPrefix,
-		longurl: longurl
+		longurl: longurl,
+		md5: urlShorten.getShort(longurl).md5
 	}, function(data){
-		if(data){
-			callback(data);
+		if(data.length === 1){
+			callback(data[0]);
 		}
 	})
 }
